@@ -7,14 +7,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT_NAME})
 
-# Add raylib as a subdir
-add_subdirectory(libs/raylib)
 
 # Gather all source files in src/
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+# Add raylib as a subdir
+add_subdirectory(libs/raylib)
 
 # Link raylib
 target_link_libraries(${PROJECT_NAME} raylib)
