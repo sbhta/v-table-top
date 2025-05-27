@@ -1,6 +1,5 @@
 #include <iostream>
 #include "level.h"
-#include "token.h"
 #include <raylib.h>
 
 int main() {
@@ -15,9 +14,6 @@ int main() {
    Level level;
    if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
 
-   Token token;
-   if (!token.loadFromFile("../tokens/TestToken/")) { TraceLog(LOG_ERROR, "Failed to load token"); }
-   token.updatePos({200, 200});
    SetTargetFPS(10);
 
    while (!WindowShouldClose()) {
@@ -26,7 +22,6 @@ int main() {
       BeginDrawing();
       ClearBackground(BLACK);
       level.draw();
-      token.draw();
       EndDrawing();
    }
 

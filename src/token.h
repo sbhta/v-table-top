@@ -10,6 +10,7 @@ public:
    bool loadFromFile(const std::string& path);
    void draw();
    void updatePos(Vector2 newPos);
+   Vector2 getPos();
    bool isMouseOver(Vector2 mousePos) const;
    Rectangle getBounds() const;
 private:
