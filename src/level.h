@@ -22,6 +22,7 @@ private:
    Texture2D background;
    int gridSize = 64;
    bool gridVisible = true;
+
    std::vector<Token> tokens;
    Token* selectedToken = nullptr;
    Vector2 dragOffset = {0, 0};
