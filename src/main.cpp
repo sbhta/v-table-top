@@ -1,5 +1,6 @@
 #include <iostream>
 #include "level.h"
+#include "button.h"
 #include <raylib.h>
 
 int main() {
@@ -16,12 +17,17 @@ int main() {
 
    SetTargetFPS(60);
 
+   //TESTING
+   Button button = {{50, 50}, {50, 50}};
+   //END TESTING
    while (!WindowShouldClose()) {
       level.update(); 
+      button.update(GetMousePosition(), IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
 
       BeginDrawing();
       ClearBackground(BLACK);
       level.draw();
+      button.draw();
       EndDrawing();
    }
 
