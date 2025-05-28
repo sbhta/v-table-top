@@ -14,7 +14,7 @@ int main() {
    Level level;
    if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
 
-   SetTargetFPS(10);
+   SetTargetFPS(60);
 
    while (!WindowShouldClose()) {
       level.update(); 

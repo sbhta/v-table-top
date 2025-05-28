@@ -1,6 +1,7 @@
 #include "token.h"
-#include <iostream>
 #include <raylib.h>
+#include "rutils.h"
+   
 
 Token::Token(const std::string& path, const Vector2 startPos){
    sprite = {};
@@ -12,18 +13,23 @@ Token::Token(const std::string& path, const Vector2 startPos){
 bool Token::loadFromSprite(const std::string& path){
    sprite = LoadTexture((path+"sprite.png").c_str());
    if (sprite.id == 0) return false;
-   std::cout << "LOADED SPRITE WITH ID " + std::to_string(sprite.id) << std::endl;
+   sprite = ResizeTexture(sprite, size.x, size.y);
    return true;
 }
 
 void Token::draw(){
    DrawTexture(sprite, pos.x, pos.y,  WHITE);
-   for (float i = 0; i < 7; i+=0.5){
-      if (isSelected) DrawCircleLines(pos.x+((float)sprite.width/2), pos.y+((float)sprite.height/2), 50+i, PINK);
-      else DrawCircleLines(pos.x+((float)sprite.width/2), pos.y+((float)sprite.height/2), 50+i, BLACK);
+   for (float i = -2.5; i < 5; i+=0.5){
+      if (isSelected) DrawCircleLines(pos.x+(size.x/2), pos.y+(size.y/2), (size.x/2)+i, PINK);
+      else DrawCircleLines(pos.x+(size.x/2), pos.y+(size.y/2), (size.x/2)+i, BLACK);
    }
 }
-
+Vector2 Token::getSize(){
+   return size;
+}
+void Token::updateSize(Vector2 newSize){
+   size = newSize;
+}
 Vector2 Token::getPos(){
    return pos;
 }
