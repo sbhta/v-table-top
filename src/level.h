@@ -11,17 +11,17 @@ struct Obstacle {
 
 class Level {
 public:
-   Level();
+   Level(const bool grid);
    ~Level();
 
    bool loadFromFile(const std::string& path);
    void update();
    void draw();
-   void drawGrid();
+   void drawGrid(); //TODO: make grid appear only on the map, not whole window
 private:
    Texture2D background;
    int gridSize = 64;
-   bool gridVisible = true;
+   bool gridVisible = false;
 
    std::vector<Token> tokens;
    Token* selectedToken = nullptr;

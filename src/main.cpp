@@ -11,7 +11,7 @@ int main() {
    InitWindow(screenWidth, screenHeight, "Virtual Tabletop");
    SetWindowPosition(GetMonitorPosition(monitor).x, GetMonitorPosition(monitor).y);
 
-   Level level;
+   Level level = {false};
    if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
 
    SetTargetFPS(60);

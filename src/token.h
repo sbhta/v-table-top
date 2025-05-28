@@ -4,7 +4,7 @@
 
 class Token{
 public:
-   Token(const std::string& path, const Vector2 startPos);
+   Token(const std::string& path, const Vector2 startPos, const Vector2 startSize);
    bool loadFromSprite(const std::string& path);
    void updatePos(Vector2 newPos);
    Vector2 getPos();
