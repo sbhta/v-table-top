@@ -1,11 +1,12 @@
 #include "button.h"
 #include "raylib.h"
-#include <iostream>
+#include <functional>
 
-Button::Button(Vector2 startPos, Vector2 startSize){
+Button::Button(Vector2 startPos, Vector2 startSize, std::function<void()> buttonFunction){
    updatePos(startPos);
    updateSize(startSize);
    bounds = {pos.x, pos.y, size.x, size.y};
+   func = buttonFunction;
 }
 void Button::update(Vector2 mousePos, bool mousePressed){
    hovered = CheckCollisionPointRec(mousePos, bounds);
@@ -23,12 +24,26 @@ void Button::draw() const {
       DrawRectangleRec(bounds, WHITE);
    }
 }
-
 void Button::onClick(){
-   std::cout << "Clicked button" << std::endl;
+   if (func) func();
 }
+
 
 Vector2 Button::getPos(){ return pos; }
 Vector2 Button::getSize(){ return size; }
-void Button::updatePos(Vector2 newPos){pos = newPos;}
-void Button::updateSize(Vector2 newSize){size = newSize;}
+void Button::updatePos(Vector2 newPos){pos = newPos; bounds.x = newPos.x; bounds.y=newPos.y;}
+void Button::updateSize(Vector2 newSize){size = newSize;bounds.width=newSize.x; bounds.height=newSize.y;}
+
+TextButton::TextButton(Vector2 pos, Vector2 size,
+                       const std::string& startLabel, int startFontSize,
+                       Color startBgColor, Color startFgColor,
+                       std::function<void()> buttonFunction):
+   Button(pos, size, buttonFunction) , label(startLabel), fontSize(startFontSize), bgColor(startBgColor), fgColor(startFgColor){}
+
+void TextButton::draw() const{
+   if (pressed) DrawRectangleRec(bounds, PINK); 
+   else DrawRectangleRec(bounds, bgColor);
+   DrawText(label.c_str(), pos.x, pos.y, fontSize, fgColor);
+}
+void TextButton::updateLabel(const std::string& newLabel){ label = newLabel; }
+

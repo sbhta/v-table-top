@@ -3,6 +3,10 @@
 #include "button.h"
 #include <raylib.h>
 
+void hello(){
+   std::cout << "HELLO FROM BUTTON" << std::endl;
+}
+
 int main() {
    int monitor = 1;
    int screenWidth = GetMonitorWidth(monitor);
@@ -14,20 +18,15 @@ int main() {
 
    Level level = {false};
    if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
-
+   TextButton tb = {{100, 100}, {200, 200}, "PRESS\nME", 30, WHITE, BLACK, hello};
    SetTargetFPS(60);
-
-   //TESTING
-   Button button = {{50, 50}, {50, 50}};
-   //END TESTING
    while (!WindowShouldClose()) {
       level.update(); 
-      button.update(GetMousePosition(), IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
-
+      tb.update(GetMousePosition(), IsMouseButtonDown(MOUSE_BUTTON_LEFT));
       BeginDrawing();
       ClearBackground(BLACK);
       level.draw();
-      button.draw();
+      tb.draw();
       EndDrawing();
    }
 
