@@ -18,11 +18,11 @@ int main() {
 
    Level level = {false};
    if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
-   TextButton tb = {{100, 100}, {200, 200}, "PRESS\nME", 30, WHITE, BLACK, hello};
+   ToggleButton tb = {{100, 100}, {200, 200}, "A","B", 30, WHITE, BLACK,true, hello};
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
       level.update(); 
-      tb.update(GetMousePosition(), IsMouseButtonDown(MOUSE_BUTTON_LEFT));
+      tb.update(GetMousePosition(), IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
       BeginDrawing();
       ClearBackground(BLACK);
       level.draw();

@@ -28,11 +28,11 @@ void Button::onClick(){
    if (func) func();
 }
 
-
 Vector2 Button::getPos(){ return pos; }
 Vector2 Button::getSize(){ return size; }
 void Button::updatePos(Vector2 newPos){pos = newPos; bounds.x = newPos.x; bounds.y=newPos.y;}
 void Button::updateSize(Vector2 newSize){size = newSize;bounds.width=newSize.x; bounds.height=newSize.y;}
+
 
 TextButton::TextButton(Vector2 pos, Vector2 size,
                        const std::string& startLabel, int startFontSize,
@@ -47,3 +47,19 @@ void TextButton::draw() const{
 }
 void TextButton::updateLabel(const std::string& newLabel){ label = newLabel; }
 
+ToggleButton::ToggleButton(Vector2 pos, Vector2 size,
+                           const std::string& startOnLable, const std::string& startOffLabel,
+                           int startFontSize,Color startBgColor, Color startFgColor,
+                           bool startState,std::function<void()> buttonFunction):
+   Button(pos, size, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel), isOn(startState),
+   fontSize(startFontSize), bgColor(startBgColor), fgColor(startFgColor){};
+
+void ToggleButton::draw() const{
+   if (pressed) DrawRectangleRec(bounds, PINK); 
+   else DrawRectangleRec(bounds, bgColor);
+   DrawText((isOn?onLabel:offLabel).c_str(), pos.x, pos.y, fontSize, fgColor);
+}
+void ToggleButton::onClick(){
+   isOn = !isOn;
+   if (func) func();
+}

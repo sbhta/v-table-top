@@ -35,4 +35,17 @@ public:
    void updateLabel(const std::string& newLabel);
 };
 
+class ToggleButton : public Button {
+protected:
+   std::string onLabel;
+   std::string offLabel;
+   bool isOn;
+   int fontSize;
+   Color bgColor;
+   Color fgColor;
+public:
+   ToggleButton(Vector2 pos, Vector2 size, const std::string& startOnLabel,const std::string& startOffLabel, int startFontSize, Color startBgColor, Color startFgColor,bool startState, std::function<void()> buttonFunction);
+   void draw() const override;
+   void onClick() override;
+};
 
