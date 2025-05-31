@@ -35,7 +35,7 @@ public:
    void updateLabel(const std::string& newLabel);
 };
 
-class ToggleButton : public Button {
+class ToggleButton : public TextButton{
 protected:
    std::string onLabel;
    std::string offLabel;
