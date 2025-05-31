@@ -51,7 +51,12 @@ ToggleButton::ToggleButton(Vector2 pos, Vector2 size,
                            const std::string& startOnLable, const std::string& startOffLabel,
                            int startFontSize,Color startBgColor, Color startFgColor,
                            bool startState,std::function<void()> buttonFunction):
-   TextButton(pos, size, "", startFontSize, startBgColor, startFgColor, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel), isOn(startState){};
+   TextButton(pos, size, "", startFontSize, startBgColor, startFgColor, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel), isOn(startState)
+{
+   bgColor = startBgColor;
+   fgColor = startFgColor;
+   fontSize = startFontSize;
+};
 void ToggleButton::draw() const{
    if (pressed) DrawRectangleRec(bounds, PINK); 
    else DrawRectangleRec(bounds, bgColor);
