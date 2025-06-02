@@ -17,12 +17,8 @@ void Button::update(Vector2 mousePos, bool mousePressed){
 }
 
 void Button::draw() const {
-   if (pressed) {
-      DrawRectangleRec(bounds, PINK);
-   }
-   else {
-      DrawRectangleRec(bounds, WHITE);
-   }
+   if (pressed) DrawRectangleRounded(bounds, 0.5f,8, PINK);
+   else DrawRectangleRounded(bounds, 0.5f,8, WHITE) ;
 }
 void Button::onClick(){
    if (func) func();
@@ -41,8 +37,8 @@ TextButton::TextButton(Vector2 pos, Vector2 size,
    Button(pos, size, buttonFunction) , label(startLabel), fontSize(startFontSize), bgColor(startBgColor), fgColor(startFgColor){}
 
 void TextButton::draw() const{
-   if (pressed) DrawRectangleRec(bounds, PINK); 
-   else DrawRectangleRec(bounds, bgColor);
+   if (pressed) DrawRectangleRounded(bounds, 0.5f,8, PINK);
+   else DrawRectangleRounded(bounds, 0.5f,8, bgColor) ;
    DrawText(label.c_str(), pos.x, pos.y, fontSize, fgColor);
 }
 void TextButton::updateLabel(const std::string& newLabel){ label = newLabel; }
@@ -58,8 +54,8 @@ ToggleButton::ToggleButton(Vector2 pos, Vector2 size,
    fontSize = startFontSize;
 };
 void ToggleButton::draw() const{
-   if (pressed) DrawRectangleRec(bounds, PINK); 
-   else DrawRectangleRec(bounds, bgColor);
+   if (pressed) DrawRectangleRounded(bounds, 0.5f,8, PINK);
+   else DrawRectangleRounded(bounds, 0.5f,8, bgColor) ;
    DrawText((isOn?onLabel:offLabel).c_str(), pos.x, pos.y, fontSize, fgColor);
 }
 void ToggleButton::onClick(){

@@ -16,8 +16,10 @@ int main() {
    InitWindow(screenWidth, screenHeight, "Virtual Tabletop");
    SetWindowPosition(GetMonitorPosition(monitor).x, GetMonitorPosition(monitor).y);
 
+   Font Proto = LoadFont("../resources/fonts/0xProtoNerdFont-Regular.ttf");
+
    Level level = {false}; if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
-   SideBar sidebar = {{(float)GetScreenWidth()-50, 20}, {50, (float)GetScreenHeight()-20}, WHITE};
+   SideBar sidebar = {{(float)GetScreenWidth()-50, 0}, {50, (float)GetScreenHeight()-20}, WHITE};
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
       level.update(); 
@@ -30,5 +32,6 @@ int main() {
    }
 
    CloseWindow();
+   UnloadFont(Proto);
    return 0;
 }
