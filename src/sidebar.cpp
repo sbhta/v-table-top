@@ -1,12 +1,15 @@
 #include "sidebar.h"
 #include "button.h"
+#include "fonts.h"
 #include "raylib.h"
 #include <memory>
 
 SideBar::SideBar(Vector2 pos, Vector2 size, Color bgColor):
    pos(pos), size(size), bgColor(bgColor){
-   addButton(std::make_unique<ToggleButton>(pos , Vector2 {50, 35}, " <", " >", "sidebar-icon", bgColor,BLACK,false,[this] () {isShow = !isShow;}));
+   //addButton(std::make_unique<ToggleButton>(pos , Vector2 {50, 35}, " <", " >", "sidebar-icon", bgColor,BLACK,false,[this] () {isShow = !isShow;}));
+   GFManager.getFont("sidebar-icon");
    //addButton(std::make_unique<ToggleButton>(Vector2 {pos.x, pos.y+40} , Vector2 {50, 35}, " 󰋁 ", " 󰋂 ", "sidebar-icon", bgColor,BLACK,false,[] () {}));
+   addButton(std::make_unique<TextButton>(Vector2 {0, 0}, Vector2 {50, 50},"a","sidebar-icon", WHITE,BLACK, [](){}));
 }
 void SideBar::addButton(std::unique_ptr<Button> button){
    buttons.push_back(std::move(button));

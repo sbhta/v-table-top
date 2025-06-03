@@ -8,6 +8,7 @@ Button::Button(Vector2 startPos, Vector2 startSize, std::function<void()> button
    updateSize(startSize);
    bounds = {pos.x, pos.y, size.x, size.y};
    func = buttonFunction;
+   GFManager.getFont("sidebar-icon");
 }
 void Button::update(Vector2 mousePos, bool mousePressed){
    hovered = CheckCollisionPointRec(mousePos, bounds);
@@ -34,7 +35,7 @@ void Button::updateSize(Vector2 newSize){size = newSize;bounds.width=newSize.x; 
 TextButton::TextButton(Vector2 pos,
                        Vector2 size,
                        const std::string& startLabel,
-                       std::string fontType,
+                       const std::string& fontType,
                        Color startBgColor,
                        Color startFgColor,
                        std::function<void()> buttonFunction):
@@ -51,12 +52,12 @@ ToggleButton::ToggleButton(Vector2 pos,
                            Vector2 size,
                            const std::string& startOnLable,
                            const std::string& startOffLabel,
-                           std::string fontType,
+                           const std::string& fontType,
                            Color startBgColor,
                            Color startFgColor,
                            bool startState,
                            std::function<void()> buttonFunction):
-   TextButton(pos, size, "", fontType, startBgColor, startFgColor, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel), isOn(startState)
+   TextButton(pos, size, "", fontType, startBgColor, startFgColor, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel), isOn(startState), fontType(fontType)
 {
    bgColor = startBgColor;
    fgColor = startFgColor;
