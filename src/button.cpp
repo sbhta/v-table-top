@@ -1,5 +1,4 @@
 #include "button.h"
-#include "fonts.h"
 #include "raylib.h"
 #include <functional>
 
@@ -8,7 +7,6 @@ Button::Button(Vector2 startPos, Vector2 startSize, std::function<void()> button
    updateSize(startSize);
    bounds = {pos.x, pos.y, size.x, size.y};
    func = buttonFunction;
-   GFManager.getFont("sidebar-icon");
 }
 void Button::update(Vector2 mousePos, bool mousePressed){
    hovered = CheckCollisionPointRec(mousePos, bounds);
@@ -35,16 +33,16 @@ void Button::updateSize(Vector2 newSize){size = newSize;bounds.width=newSize.x; 
 TextButton::TextButton(Vector2 pos,
                        Vector2 size,
                        const std::string& startLabel,
-                       const std::string& fontType,
+                       Font& font,
                        Color startBgColor,
                        Color startFgColor,
                        std::function<void()> buttonFunction):
-   Button(pos, size, buttonFunction) , label(startLabel), fontType(fontType), bgColor(startBgColor), fgColor(startFgColor){}
+   Button(pos, size, buttonFunction) , label(startLabel), font(font), bgColor(startBgColor), fgColor(startFgColor){}
 
 void TextButton::draw() const{
    if (pressed) DrawRectangleRounded(bounds, 0.5f,8, PINK);
    else DrawRectangleRounded(bounds, 0.5f,8, bgColor) ;
-   DrawTextEx(GFManager.getFont(fontType),label.c_str(), pos, GFManager.getFont(fontType).baseSize, 1, fgColor);
+   DrawTextEx(font,label.c_str(), pos, font.baseSize, 1, fgColor);
 }
 void TextButton::updateLabel(const std::string& newLabel){ label = newLabel; }
 
@@ -52,20 +50,16 @@ ToggleButton::ToggleButton(Vector2 pos,
                            Vector2 size,
                            const std::string& startOnLable,
                            const std::string& startOffLabel,
-                           const std::string& fontType,
+                           Font& font,
                            Color startBgColor,
                            Color startFgColor,
                            bool startState,
                            std::function<void()> buttonFunction):
-   TextButton(pos, size, "", fontType, startBgColor, startFgColor, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel), isOn(startState), fontType(fontType)
-{
-   bgColor = startBgColor;
-   fgColor = startFgColor;
-};
+   TextButton(pos, size, "", font, startBgColor, startFgColor, buttonFunction),onLabel(startOnLable), offLabel(startOffLabel),  isOn(startState){};
 void ToggleButton::draw() const{
    if (pressed) DrawRectangleRounded(bounds, 0.5f,8, PINK);
    else DrawRectangleRounded(bounds, 0.5f,8, bgColor) ;
-   DrawTextEx(GFManager.getFont(fontType),(isOn?onLabel:offLabel).c_str(), pos, GFManager.getFont(fontType).baseSize, 1, fgColor);
+   DrawTextEx(font,(isOn?onLabel:offLabel).c_str(), pos, font.baseSize, 1, fgColor);
 }
 void ToggleButton::onClick(){
    isOn = !isOn;

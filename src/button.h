@@ -26,11 +26,11 @@ public:
 class TextButton : public Button {
 protected:
    std::string label;
-   const std::string& fontType;
+   Font& font;
    Color bgColor;
    Color fgColor;
 public:
-   TextButton(Vector2 pos, Vector2 size, const std::string& startLabel, const std::string& fontType, Color startBgColor, Color startFgColor, std::function<void()> buttonFunction);
+   TextButton(Vector2 pos, Vector2 size, const std::string& startLabel,Font& font, Color startBgColor, Color startFgColor, std::function<void()> buttonFunction);
    void draw() const override;
    void updateLabel(const std::string& newLabel);
 };
@@ -39,13 +39,10 @@ class ToggleButton : public TextButton{
 protected:
    std::string onLabel;
    std::string offLabel;
-   const std::string& fontType;
-   Color bgColor;
-   Color fgColor;
 public:
-   bool isOn;
-   ToggleButton(Vector2 pos, Vector2 size, const std::string& startOnLabel,const std::string& startOffLabel,const std::string& fontType, Color startBgColor, Color startFgColor,bool startState, std::function<void()> buttonFunction);
+   ToggleButton(Vector2 pos, Vector2 size, const std::string& startOnLabel,const std::string& fontType,Font& font, Color startBgColor, Color startFgColor,bool startState, std::function<void()> buttonFunction);
    void draw() const override;
    void onClick() override;
+   bool isOn;
 };
 
