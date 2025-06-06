@@ -18,6 +18,7 @@ public:
    void update();
    void draw();
    void drawGrid(); //TODO: make grid appear only on the map, not whole window
+   void switchGrid();
 private:
    Texture2D background;
    int gridSize = 64;

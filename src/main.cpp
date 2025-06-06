@@ -24,7 +24,7 @@ int main() {
       return 1;
    }
    Level level = {false}; if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
-   SideBar sidebar = {{(float)GetScreenWidth()-50, 0}, {50, (float)GetScreenHeight()-20}, WHITE};
+   SideBar sidebar = {{(float)GetScreenWidth()-50, 0}, {50, (float)GetScreenHeight()-20}, WHITE, level};
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
       level.update(); 

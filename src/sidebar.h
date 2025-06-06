@@ -1,12 +1,13 @@
 #pragma once
 
 #include "button.h"
+#include "level.h"
 #include "raylib.h"
 #include <memory>
 #include <vector>
 class SideBar{
 public:
-   SideBar(Vector2 pos, Vector2 size, Color bgColor);
+   SideBar(Vector2 pos, Vector2 size, Color bgColor, Level& level);
    void draw();
    void update(Vector2 mousePos, bool mousePressed);
    Vector2 getPos();
@@ -21,4 +22,5 @@ private:
    Vector2 size;
    Color bgColor;
    bool isShow = true;
+   Level& level;
 };

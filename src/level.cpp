@@ -1,5 +1,6 @@
 #include "level.h"
 #include "raymath.h"
+#include "rutils.h"
 #include "token.h"
 #include <raylib.h>
 
@@ -18,14 +19,16 @@ Level::~Level(){
 bool Level::loadFromFile(const std::string& path) {
    background = LoadTexture((path+"map.png").c_str());
    if (background.id == 0) return false;
+   // scale the image according to screen
+   float scale = std::min( static_cast<float>(GetScreenWidth()) / background.width, static_cast<float>(GetScreenHeight()) / background.height);
+   Image image = LoadImageFromTexture(background); ImageResize(&image, image.width*scale, image.height*scale);
+   UnloadTexture(background); background = LoadTextureFromImage(image);
+   UnloadImage(image);
    return true;
 }
 void Level::draw(){
-   float scale = std::min(
-    static_cast<float>(GetScreenWidth()) / background.width,
-    static_cast<float>(GetScreenHeight()) / background.height
-   );
-   DrawTextureEx(background, {0, 0}, 0.0f, scale, WHITE);
+   DrawTextureEx(background, {0, 0}, 0.0f, 1, WHITE);
+   
    if(gridVisible) drawGrid();
 
    for (auto& token : tokens){
@@ -33,12 +36,15 @@ void Level::draw(){
    }
 }
 void Level::drawGrid() {
-    int mapWidth = background.width;
-    int mapHeight = background.height;
-    Color gridColor = Fade(LIGHTGRAY, 0.4f);
-    for (int x = 0; x < mapWidth; x += gridSize) DrawLine(x, 0, x, mapHeight, gridColor);
-    for (int y = 0; y < mapHeight; y += gridSize) DrawLine(0, y, mapWidth, y, gridColor);
-    
+   float mapWidth = background.width;
+   float mapHeight = background.height;
+   Color gridColor = Fade(LIGHTGRAY, 0.4f);
+   for (int x = 0; x < mapWidth;x += gridSize){
+      DrawLine(x, 0, x, mapHeight, gridColor);
+   }
+   for (int y = 0; y < mapHeight;y += gridSize){
+      DrawLine(0, y, mapWidth, y, gridColor);
+   }
 }
 void Level::update() {
    handleTokenSelectionAndDrag();
@@ -64,4 +70,6 @@ void Level::handleTokenSelectionAndDrag(){
    }
 }
 
-
+void Level::switchGrid(){
+   gridVisible = !gridVisible;
+}
