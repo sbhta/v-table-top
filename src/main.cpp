@@ -6,9 +6,6 @@
 #include "sidebar.h"
 #include "fonts.h"
 
-void hello(){
-   std::cout << "HELLO FROM BUTTON" << std::endl;
-}
 
 int main() {
    int monitor = 1;
