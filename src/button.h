@@ -34,7 +34,6 @@ public:
    void draw() const override;
    void updateLabel(const std::string& newLabel);
 };
-
 class ToggleButton : public TextButton{
 protected:
    std::string onLabel;
@@ -45,4 +44,5 @@ public:
    void onClick() override;
    bool isOn;
 };
+
 

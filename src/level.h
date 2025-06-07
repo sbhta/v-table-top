@@ -19,11 +19,10 @@ public:
    void draw();
    void drawGrid(); //TODO: make grid appear only on the map, not whole window
    void switchGrid();
+   int gridSize = 36;
 private:
    Texture2D background;
-   int gridSize = 64;
    bool gridVisible = false;
-
    std::vector<Token> tokens;
    Token* selectedToken = nullptr;
    Vector2 dragOffset = {0, 0};

@@ -18,13 +18,13 @@ int main() {
    SetConfigFlags(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_TOPMOST);
    InitWindow(screenWidth, screenHeight, "Virtual Tabletop");
    SetWindowPosition(GetMonitorPosition(monitor).x, GetMonitorPosition(monitor).y);
-   try{GFManager.loadFont("sidebar-icon", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);}
-   catch (const std::exception& e){
-      TraceLog(LOG_ERROR, e.what());
-      return 1;
-   }
+
+   GFManager.loadFont("sidebar-icon", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
+   GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 36);
+   GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
+
    Level level = {false}; if (!level.loadFromFile("../maps/TestMap/")) { TraceLog(LOG_ERROR, "Failed to load level"); }
-   SideBar sidebar = {{(float)GetScreenWidth()-50, 0}, {50, (float)GetScreenHeight()-20}, WHITE, level};
+   SideBar sidebar = {{(float)GetScreenWidth()-200, 0}, {150, (float)GetScreenHeight()-20}, WHITE, level};
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
       level.update(); 
@@ -33,7 +33,6 @@ int main() {
       ClearBackground(BLACK);
       level.draw();
       sidebar.draw();
-      DrawTextEx(GFManager.getFont("sidebar-icon", 42), "<HELLO world󰋂 ", {100, 100}, GFManager.getFont("sidebar-icon", 42).baseSize, 3.0f, WHITE);
       EndDrawing();
    }
    CloseWindow();
