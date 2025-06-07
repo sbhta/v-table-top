@@ -27,3 +27,22 @@ Texture2D ResizeTexture(Texture2D texture, int newWidth, int newHeight) {
 
    return resized;
 }
+int GetAccurateCurrentMonitor() {
+   Vector2 windowPos = GetWindowPosition();
+
+   int monitorCount = GetMonitorCount();
+   for (int i = 0; i < monitorCount; i++) {
+      int x = GetMonitorPosition(i).x;
+      int y = GetMonitorPosition(i).y;
+      int w = GetMonitorWidth(i);
+      int h = GetMonitorHeight(i);
+
+      if (windowPos.x >= x && windowPos.x < (x + w) &&
+         windowPos.y >= y && windowPos.y < (y + h)) {
+         return i;
+      }
+   }
+
+   return 0; // fallback to primary monitor
+}
+
