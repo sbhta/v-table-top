@@ -15,6 +15,7 @@ public:
    void updatePos(Vector2 newPos);
    void updateSize(Vector2 newSize);
 
+   void initButtons();
    void addButton(std::unique_ptr<Button> button);
    std::vector<std::unique_ptr<Button>> buttons;
 private:

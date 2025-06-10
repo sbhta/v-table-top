@@ -11,13 +11,13 @@ struct Obstacle {
 
 class Level {
 public:
-   Level(const bool grid);
+   Level();
    ~Level();
 
    bool loadFromFile(const std::string& path);
    void update();
    void draw();
-   void drawGrid(); //TODO: make grid appear only on the map, not whole window
+   void drawGrid(); 
    void switchGrid();
    int gridSize = 36;
 private:

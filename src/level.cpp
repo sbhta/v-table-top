@@ -4,11 +4,10 @@
 #include "token.h"
 #include <raylib.h>
 
-Level::Level(const bool grid) {
+Level::Level() {
    background = {};
    tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}});
    tokens.push_back({"../tokens/TestToken/", {1000, 500}, {50, 50}});
-   if (grid) gridVisible = true;
 }
 Level::~Level(){
    if (background.id > 0){
@@ -17,13 +16,17 @@ Level::~Level(){
 }
 
 bool Level::loadFromFile(const std::string& path) {
-   background = LoadTexture((path+"map.png").c_str());
+   // loading the map image itself
+   UnloadTexture(background); background = LoadTexture((path+"map.png").c_str());
    if (background.id == 0) return false;
    // scale the image according to screen
    float scale = std::min( static_cast<float>(GetScreenWidth()) / background.width, static_cast<float>(GetScreenHeight()) / background.height);
    Image image = LoadImageFromTexture(background); ImageResize(&image, image.width*scale, image.height*scale);
    UnloadTexture(background); background = LoadTextureFromImage(image);
    UnloadImage(image);
+
+   // TODO: load map info like tokens and obstecales
+
    return true;
 }
 void Level::draw(){
