@@ -14,7 +14,7 @@ public:
    Level();
    ~Level();
 
-   bool loadFromFile(const std::string& path);
+   bool loadMap(const std::string& path);
    void update();
    void draw();
    void drawGrid(); 

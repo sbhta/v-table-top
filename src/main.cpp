@@ -41,7 +41,7 @@ int main() {
                SetWindowState(FLAG_WINDOW_UNDECORATED | FLAG_WINDOW_TOPMOST);
                SetWindowPosition(GetMonitorPosition(monitor).x, GetMonitorPosition(monitor).y);
                level = {};
-               level.loadFromFile("../maps/TestMap/");
+               level.loadMap("../maps/TestMap/");
                sidebar.updatePos({(float)GetScreenWidth()-200, 0});
                sidebar.updateSize({150, (float)GetScreenWidth()-20});
                sidebar.initButtons();

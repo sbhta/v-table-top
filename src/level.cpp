@@ -15,7 +15,7 @@ Level::~Level(){
    }
 }
 
-bool Level::loadFromFile(const std::string& path) {
+bool Level::loadMap(const std::string& path) {
    // loading the map image itself
    UnloadTexture(background); background = LoadTexture((path+"map.png").c_str());
    if (background.id == 0) return false;
@@ -26,6 +26,7 @@ bool Level::loadFromFile(const std::string& path) {
    UnloadImage(image);
 
    // TODO: load map info like tokens and obstecales
+
 
    return true;
 }
