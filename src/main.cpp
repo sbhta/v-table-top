@@ -14,7 +14,7 @@ enum class AppState {
 
 int main() {
    InitWindow(1000, 1000, "Virtual Tabletop");
-   AppState currentState = AppState::GREETING;
+   AppState currentState = AppState::GAME;
    int monitor = GetAccurateCurrentMonitor();
    int screenWidth = GetMonitorWidth(monitor);
    int screenHeight = GetMonitorHeight(monitor);
@@ -22,6 +22,7 @@ int main() {
    GFManager.loadFont("sidebar-icon", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
    GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 36);
    GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
+   GFManager.loadFont("token-name", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 16);
 
    Level level = {};
    SideBar sidebar = {{}, {}, WHITE, level};

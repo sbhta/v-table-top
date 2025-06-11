@@ -6,15 +6,14 @@
 
 Level::Level() {
    background = {};
-   tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}});
-   tokens.push_back({"../tokens/TestToken/", {1000, 500}, {50, 50}});
+   tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}, "Sbhta The Great", {43, 75}});
+   tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}, "Sbhta The Greatest", {47, 75}});
 }
 Level::~Level(){
    if (background.id > 0){
       UnloadTexture(background);
    }
 }
-
 bool Level::loadMap(const std::string& path) {
    // loading the map image itself
    UnloadTexture(background); background = LoadTexture((path+"map.png").c_str());
@@ -55,6 +54,14 @@ void Level::update() {
 }
 void Level::handleTokenSelectionAndDrag(){
    Vector2 mouse = GetMousePosition();
+   // Testing to see if better to first check if button over the token before seeing if button pressed
+   for (auto& token : tokens){
+      if (token.isMouseOver(mouse)){
+         token.isHovered = true;
+         break;
+      }
+      else token.isHovered = false;
+   }
    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
       selectedToken = nullptr;
       for (auto& token : tokens){
@@ -73,7 +80,6 @@ void Level::handleTokenSelectionAndDrag(){
       selectedToken = nullptr;
    }
 }
-
 void Level::switchGrid(){
    gridVisible = !gridVisible;
 }
