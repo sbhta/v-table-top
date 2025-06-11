@@ -28,8 +28,7 @@ void Token::draw(){
       else DrawCircleLines(pos.x+(size.x/2), pos.y+(size.y/2), (size.x/2)+i, BLACK);
    }
    if (isHovered) {
-      // TODO: center the text
-      DrawTextEx(GFManager.getFont("token-name", 16), name.c_str(), pos, GFManager.getFont("token-name", 16).baseSize, 0, PINK);
+      DrawTextEx(nameFont,name.c_str(),{(pos.x+size.x/2)-(MeasureTextEx(nameFont,name.c_str(),nameFont.baseSize,0).x/2), pos.y-20 },nameFont.baseSize,0,PINK);
    }
 }
 Vector2 Token::getSize(){

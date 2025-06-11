@@ -1,4 +1,5 @@
 #pragma once
+#include "fonts.h"
 #include <string>
 #include <raylib.h>
 #include <utility>
@@ -21,6 +22,7 @@ public:
    Rectangle getBounds() const;
    bool isSelected = false;
    bool isHovered = false;
+   Font nameFont = GFManager.getFont("token-name", 16);
 private:
    Vector2 pos;
    Vector2 size = {180, 180};
