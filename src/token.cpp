@@ -30,6 +30,7 @@ void Token::draw(){
    if (isHovered) {
       DrawTextEx(nameFont,name.c_str(),{(pos.x+size.x/2)-(MeasureTextEx(nameFont,name.c_str(),nameFont.baseSize,0).x/2), pos.y-20 },nameFont.baseSize,0,PINK);
    }
+   // TODO: draw health beneath the token
 }
 Vector2 Token::getSize(){
    return size;

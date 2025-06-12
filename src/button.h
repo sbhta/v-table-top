@@ -22,7 +22,6 @@ public:
    virtual void onClick();
    std::function<void()> func;
 };
-
 class TextButton : public Button {
 protected:
    std::string label;
