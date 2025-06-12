@@ -23,6 +23,7 @@ int main() {
    GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 36);
    GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
    GFManager.loadFont("token-name", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 16);
+   GFManager.loadFont("token-hp", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 12);
 
    Level level = {};
    SideBar sidebar = {{}, {}, WHITE, level};

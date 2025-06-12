@@ -1,7 +1,6 @@
 #include "token.h"
 #include <raylib.h>
 #include <string>
-#include "fonts.h"
 #include "rutils.h"
    
 
@@ -29,8 +28,10 @@ void Token::draw(){
    }
    if (isHovered) {
       DrawTextEx(nameFont,name.c_str(),{(pos.x+size.x/2)-(MeasureTextEx(nameFont,name.c_str(),nameFont.baseSize,0).x/2), pos.y-20 },nameFont.baseSize,0,PINK);
+      DrawRectangleRec({pos.x, pos.y+size.y*1.15f, size.x, (float)hpFont.baseSize}, GRAY);
+      DrawRectangleRec({pos.x, pos.y+size.y*1.15f, hp.first*(size.x/hp.second), (float)hpFont.baseSize}, RED);
    }
-   // TODO: draw health beneath the token
+   
 }
 Vector2 Token::getSize(){
    return size;
@@ -49,4 +50,19 @@ bool Token::isMouseOver(Vector2 mousePos){
 }
 Rectangle Token::getBounds() const{
     return Rectangle{ pos.x, pos.y, size.x, size.y };
+}
+std::string Token::getName(){
+   return name;
+}
+std::pair<int, int> Token::gethp(){
+   return hp;
+}
+void Token::updateName(const std::string& newName) {
+   name = newName;
+}
+void Token::updateHp(int newHp){
+   hp.first = newHp;
+}
+void Token::updateMaxHp(int newMaxHp){
+   hp.second = newMaxHp;
 }

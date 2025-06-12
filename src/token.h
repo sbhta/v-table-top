@@ -23,6 +23,7 @@ public:
    bool isSelected = false;
    bool isHovered = false;
    Font nameFont = GFManager.getFont("token-name", 16);
+   Font hpFont = GFManager.getFont("token-hp", 12);
 private:
    Vector2 pos;
    Vector2 size = {180, 180};

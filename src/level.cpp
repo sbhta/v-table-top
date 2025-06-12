@@ -6,7 +6,7 @@
 
 Level::Level() {
    background = {};
-   tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}, "Sbhta", {43, 75}});
+   tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}, "Sbhta", {50, 100}});
 }
 Level::~Level(){
    if (background.id > 0){
