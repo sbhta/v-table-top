@@ -2,11 +2,13 @@
 #include "raymath.h"
 #include "rutils.h"
 #include "token.h"
+#include <iostream>
 #include <raylib.h>
 
 Level::Level() {
    background = {};
    tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}, "Sbhta", {50, 100}});
+   tokens.push_back({"../tokens/TestToken/", {600, 500}, {50, 50}, "Sbhta", {50, 100}});
 }
 Level::~Level(){
    if (background.id > 0){
@@ -48,36 +50,29 @@ void Level::drawGrid() {
       DrawLine(0, y, mapWidth, y, gridColor);
    }
 }
-void Level::update() {
-   handleTokenSelectionAndDrag();
+void Level::update(Vector2 mousePos) {
+   handleTokenSelectionAndDrag(mousePos);
 }
-void Level::handleTokenSelectionAndDrag(){
-   Vector2 mouse = GetMousePosition();
-   // Testing to see if better to first check if button over the token before seeing if button pressed
+void Level::handleTokenSelectionAndDrag(Vector2 mousePos){
    for (auto& token : tokens){
-      if (token.isMouseOver(mouse)){
+      if (token.isMouseOver(mousePos)){
          token.isHovered = true;
-         break;
-      }
-      else token.isHovered = false;
-   }
-   if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
-      selectedToken = nullptr;
-      for (auto& token : tokens){
-         token.isSelected = false;
-         if (token.isMouseOver(mouse)){
+         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
             selectedToken = &token;
-            selectedToken->isSelected = true;
-            dragOffset = Vector2Subtract(mouse, token.getPos());
+            dragOffset = Vector2Subtract(token.getPos(), mousePos);
             break;
          }
       }
+      else {
+         token.isHovered = false;
+      }
    }
-   if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && selectedToken) selectedToken->updatePos(Vector2Subtract(mouse, dragOffset));
-   if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
-      if (selectedToken) selectedToken->isSelected = false;
-      selectedToken = nullptr;
+   if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && selectedToken) {
+      if (selectedToken->isMouseOver(mousePos)){
+         selectedToken->updatePos(Vector2Add(mousePos, dragOffset));
+      }
    }
+
 }
 void Level::switchGrid(){
    gridVisible = !gridVisible;

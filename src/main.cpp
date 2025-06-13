@@ -28,7 +28,7 @@ int main() {
    Level level = {};
    SideBar sidebar = {{}, {}, WHITE, level};
    bool loadingGame = true;
-   SetTargetFPS(60);
+   SetTargetFPS(300);
    TextButton b = {{500, 500}, {100, 100}, "CLICK ME", GFManager.getFont("sidebar-text", 42), WHITE, BLACK, [&currentState](){currentState=AppState::GAME;}};
    while (!WindowShouldClose()) {
       BeginDrawing();
@@ -49,7 +49,7 @@ int main() {
                sidebar.initButtons();
                loadingGame = false;
             }
-            level.update(); 
+            level.update(GetMousePosition()); 
             sidebar.update(GetMousePosition(), IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
             ClearBackground(BLACK);
             level.draw();

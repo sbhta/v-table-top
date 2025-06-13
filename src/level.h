@@ -15,7 +15,7 @@ public:
    ~Level();
 
    bool loadMap(const std::string& path);
-   void update();
+   void update(Vector2 mousePos);
    void draw();
    void drawGrid(); 
    void switchGrid();
@@ -27,5 +27,5 @@ private:
    Token* selectedToken = nullptr;
    Vector2 dragOffset = {0, 0};
 
-   void handleTokenSelectionAndDrag();
+   void handleTokenSelectionAndDrag(Vector2 mousePos);
 };
