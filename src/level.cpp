@@ -1,13 +1,14 @@
 #include "level.h"
 #include "raymath.h"
-#include "rutils.h"
 #include "token.h"
+#include <fstream>
 #include <iostream>
 #include <raylib.h>
+#include <string>
+#include <vector>
 
 Level::Level() {
    background = {};
-   tokens.push_back({"../tokens/TestToken/", {500, 500}, {50, 50}, "Sbhta", {50, 100}});
    tokens.push_back({"../tokens/TestToken/", {600, 500}, {50, 50}, "Sbhta", {50, 100}});
 }
 Level::~Level(){
@@ -15,9 +16,10 @@ Level::~Level(){
       UnloadTexture(background);
    }
 }
-bool Level::loadMap(const std::string& path) {
+bool Level::loadMap(const std::string& pathDir) {
+   path = pathDir;
    // loading the map image itself
-   UnloadTexture(background); background = LoadTexture((path+"map.png").c_str());
+   UnloadTexture(background); background = LoadTexture((pathDir+"map.png").c_str());
    if (background.id == 0) return false;
    // scale the image according to screen
    float scale = std::min( static_cast<float>(GetScreenWidth()) / background.width, static_cast<float>(GetScreenHeight()) / background.height);
@@ -26,13 +28,42 @@ bool Level::loadMap(const std::string& path) {
    UnloadImage(image);
 
    // TODO: load map info like tokens and obstecales
-
+   std::vector<std::vector<std::string>> data;
+   std::ifstream infile(pathDir+"data.txt");
+   if (infile){
+      std::string line;
+      while (std::getline(infile, line)){
+         // comments
+         if (line[0] == '#') continue;
+         // handling a token
+         std::vector<std::string> parts;
+         std::string tempPart = "";
+         for (char ch : line){
+            if (ch == '.') {
+               parts.push_back(tempPart);
+               tempPart = "";
+               continue;
+            }
+            tempPart += ch;
+         }
+         parts.push_back(tempPart);
+         data.push_back(parts);
+      }
+      infile.close();
+   }
+   
+   for (const auto& v : data){
+      // type token
+      if (v[0] == "t"){
+         tokens.push_back({"../tokens/TestToken/", {std::stof(v[4]), std::stof(v[5])}, {std::stof(v[6]), std::stof(v[7])}, v[1], {std::stoi(v[2]), std::stoi(v[3])}});
+      }
+   }
 
    return true;
 }
 void Level::draw(){
    DrawTextureEx(background, {0, 0}, 0.0f, 1, WHITE);
-   
+
    if(gridVisible) drawGrid();
 
    for (auto& token : tokens){

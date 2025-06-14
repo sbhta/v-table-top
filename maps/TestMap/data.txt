@@ -1,1 +1,2 @@
-token gob 120 100
+# type|name|hp|hpMax|posx|posy|sizex|sizey
+t.sbhta.75.100.500.500.50.50

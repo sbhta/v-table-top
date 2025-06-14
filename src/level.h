@@ -26,6 +26,7 @@ private:
    std::vector<Token> tokens;
    Token* selectedToken = nullptr;
    Vector2 dragOffset = {0, 0};
+   std::string path;
 
    void handleTokenSelectionAndDrag(Vector2 mousePos);
 };
