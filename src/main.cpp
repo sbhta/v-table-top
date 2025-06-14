@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include <string>
 #include "button.h"
+#include "color.h"
 #include "sidebar.h"
 #include "fonts.h"
 #include "rutils.h"
@@ -24,6 +25,8 @@ int main() {
    GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
    GFManager.loadFont("token-name", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 16);
    GFManager.loadFont("token-hp", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 12);
+
+   GCManager.addColor("base", "#24273a");
 
    Level level = {};
    SideBar sidebar = {{}, {}, WHITE, level};

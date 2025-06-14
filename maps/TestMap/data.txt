@@ -1,2 +1,2 @@
-# type|name|hp|hpMax|posx|posy|sizex|sizey
-t.sbhta.75.100.500.500.50.50
+t.Sbhta.50.100.1003.620.50.50
+t.Sbhta.50.100.884.644.50.50

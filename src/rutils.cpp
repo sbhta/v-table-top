@@ -1,4 +1,5 @@
 #include "rutils.h"
+#include <sstream>
 
 Texture2D ResizeTexture(Texture2D texture, int newWidth, int newHeight) {
    // Create a render texture to draw into
@@ -46,3 +47,33 @@ int GetAccurateCurrentMonitor() {
    return 0; // fallback to primary monitor
 }
 
+Color HexToColor(const std::string& hex) {
+    std::string hexCode = hex;
+
+    // Remove '#' if it exists
+    if (hexCode[0] == '#') hexCode = hexCode.substr(1);
+
+    // Default alpha
+    unsigned char r = 0, g = 0, b = 0, a = 255;
+
+    if (hexCode.length() == 6 || hexCode.length() == 8) {
+        std::stringstream ss;
+        unsigned int hexValue;
+        ss << std::hex << hexCode.substr(0, 6);
+        ss >> hexValue;
+
+        r = (hexValue >> 16) & 0xFF;
+        g = (hexValue >> 8) & 0xFF;
+        b = hexValue & 0xFF;
+
+        if (hexCode.length() == 8) {
+            std::stringstream ssAlpha;
+            ssAlpha << std::hex << hexCode.substr(6, 2);
+            unsigned int alphaValue;
+            ssAlpha >> alphaValue;
+            a = static_cast<unsigned char>(alphaValue);
+        }
+    }
+
+    return Color{r, g, b, a};
+}

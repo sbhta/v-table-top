@@ -9,12 +9,21 @@
 
 Level::Level() {
    background = {};
-   tokens.push_back({"../tokens/TestToken/", {600, 500}, {50, 50}, "Sbhta", {50, 100}});
 }
 Level::~Level(){
    if (background.id > 0){
       UnloadTexture(background);
    }
+   std::ofstream outfile(path+"data.txt", std::ios::trunc);
+   if (!outfile) {std::cerr << "Failed to write data to map" << std::endl;}
+   for (auto& token : tokens){
+      outfile << "t.";
+      outfile << token.getName() << ".";
+      outfile << token.gethp().first << "." << token.gethp().second<< ".";
+      outfile << token.getPos().x<< "." << token.getPos().y<< ".";
+      outfile << token.getSize().x<< "." << token.getSize().y << std::endl;
+   }
+   outfile.close();
 }
 bool Level::loadMap(const std::string& pathDir) {
    path = pathDir;
@@ -27,13 +36,13 @@ bool Level::loadMap(const std::string& pathDir) {
    UnloadTexture(background); background = LoadTextureFromImage(image);
    UnloadImage(image);
 
-   // TODO: load map info like tokens and obstecales
+   // Get data from map directory
    std::vector<std::vector<std::string>> data;
    std::ifstream infile(pathDir+"data.txt");
    if (infile){
       std::string line;
       while (std::getline(infile, line)){
-         // comments
+         // If # is first charachter then its a comment so skip
          if (line[0] == '#') continue;
          // handling a token
          std::vector<std::string> parts;
@@ -51,11 +60,13 @@ bool Level::loadMap(const std::string& pathDir) {
       }
       infile.close();
    }
-   
+   // Initializing the data
    for (const auto& v : data){
       // type token
       if (v[0] == "t"){
-         tokens.push_back({"../tokens/TestToken/", {std::stof(v[4]), std::stof(v[5])}, {std::stof(v[6]), std::stof(v[7])}, v[1], {std::stoi(v[2]), std::stoi(v[3])}});
+         tokens.push_back({"../tokens/TestToken/", {std::stof(v[4]), std::stof(v[5])},
+            {std::stof(v[6]), std::stof(v[7])},
+            v[1], {std::stoi(v[2]), std::stoi(v[3])}});
       }
    }
 
