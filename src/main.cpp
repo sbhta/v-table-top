@@ -20,19 +20,19 @@ int main() {
    int screenWidth = GetMonitorWidth(monitor);
    int screenHeight = GetMonitorHeight(monitor);
 
-   GFManager.loadFont("sidebar-icon", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
-   GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 36);
-   GFManager.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
-   GFManager.loadFont("token-name", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 16);
-   GFManager.loadFont("token-hp", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 12);
+   GFM.loadFont("sidebar-icon", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
+   GFM.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 36);
+   GFM.loadFont("sidebar-text", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 42);
+   GFM.loadFont("token-name", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 16);
+   GFM.loadFont("token-hp", "../resources/fonts/0xProtoNerdFont-Regular.ttf", 12);
 
-   GCManager.addColor("base", "#24273a");
+   if (!GCM.getTheme("../resources/themes/catppuccin.txt")) return 1;
 
    Level level = {};
-   SideBar sidebar = {{}, {}, WHITE, level};
+   SideBar sidebar = {{}, {}, GCM.getColor("bgSidebar"),GCM.getColor("fgSidebar"), level};
    bool loadingGame = true;
    SetTargetFPS(300);
-   TextButton b = {{500, 500}, {100, 100}, "CLICK ME", GFManager.getFont("sidebar-text", 42), WHITE, BLACK, [&currentState](){currentState=AppState::GAME;}};
+   TextButton b = {{500, 500}, {100, 100}, "CLICK ME", GFM.getFont("sidebar-text", 42), WHITE, BLACK, [&currentState](){currentState=AppState::GAME;}};
    while (!WindowShouldClose()) {
       BeginDrawing();
       switch (currentState) {

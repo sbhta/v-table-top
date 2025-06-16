@@ -8,9 +8,10 @@ public:
    ColorManager();
    ~ColorManager();
    void addColor(const std::string& name, const std::string& hex);
+   bool getTheme(const std::string& themePath);
    Color& getColor(const std::string& name);
 private:
    std::map<std::string, Color> colors;
 };
-extern ColorManager GCManager;
+extern ColorManager GCM;
 

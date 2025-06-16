@@ -22,8 +22,8 @@ public:
    Rectangle getBounds() const;
    bool isSelected = false;
    bool isHovered = false;
-   Font nameFont = GFManager.getFont("token-name", 16);
-   Font hpFont = GFManager.getFont("token-hp", 12);
+   Font nameFont = GFM.getFont("token-name", 16);
+   Font hpFont = GFM.getFont("token-hp", 12);
 private:
    Vector2 pos;
    Vector2 size = {180, 180};

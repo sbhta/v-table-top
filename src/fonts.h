@@ -12,4 +12,4 @@ public:
 private:
    std::map<std::string, std::map<int, Font>> fonts;
 };
-extern FontManager GFManager;
+extern FontManager GFM;

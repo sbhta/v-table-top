@@ -1,0 +1,2 @@
+bgSidebar.#24273a
+fgSidebar.#cad3f5

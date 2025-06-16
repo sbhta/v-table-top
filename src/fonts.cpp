@@ -39,4 +39,4 @@ void FontManager::unloadAll(){
    fonts.clear();
 }
 
-FontManager GFManager;
+FontManager GFM;
