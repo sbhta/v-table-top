@@ -7,7 +7,7 @@
 class Token{
 public:
    Token(const std::string& path, const Vector2 startPos, const Vector2 startSize, const std::string& startName, std::pair<int, int> startHp);
-   bool loadSprite(const std::string& path);
+   bool loadSprite();
    Vector2 getPos();
    Vector2 getSize();
    std::string getName();
@@ -25,6 +25,7 @@ public:
    Font nameFont = GFM.getFont("token-name", 16);
    Font hpFont = GFM.getFont("token-hp", 12);
 private:
+   std::string path;
    Vector2 pos;
    Vector2 size = {180, 180};
    Texture2D sprite;

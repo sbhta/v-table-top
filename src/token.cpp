@@ -2,22 +2,21 @@
 #include <raylib.h>
 #include <string>
 #include "rutils.h"
-   
 
-Token::Token(const std::string& path, const Vector2 startPos, const Vector2 startSize, const std::string& startName, std::pair<int, int> startHp){
+Token::Token(const std::string& dirPath, const Vector2 startPos, const Vector2 startSize, const std::string& startName, std::pair<int, int> startHp){
+   path = dirPath;
    sprite = {};
    isSelected = false;
    updateSize(startSize);
-   loadSprite(path);
+   loadSprite();
    pos = startPos;
    name = startName;
    hp = startHp;
 }
-bool Token::loadSprite(const std::string& path){
+bool Token::loadSprite(){
    sprite = LoadTexture((path+"sprite.png").c_str());
    if (sprite.id == 0) return false;
    sprite = ResizeTexture(sprite, size.x, size.y);
-   updateSize({(float)sprite.width, (float)sprite.width});
    return true;
 }
 void Token::draw(){
@@ -38,6 +37,7 @@ Vector2 Token::getSize(){
 }
 void Token::updateSize(Vector2 newSize){
    size = newSize;
+   sprite = ResizeTexture(LoadTexture((path+"sprite.png").c_str()), size.x, size.y);
 }
 Vector2 Token::getPos(){
    return pos;

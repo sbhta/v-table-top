@@ -16,8 +16,9 @@ public:
    void updateSize(Vector2 newSize);
 
    void initButtons();
-   void addButton(std::unique_ptr<Button> button);
-   std::vector<std::unique_ptr<Button>> buttons;
+   void addButton(std::vector<std::unique_ptr<Button>>& group,std::unique_ptr<Button> button);
+   std::vector<std::unique_ptr<Button>> levelButtons;
+   std::vector<std::unique_ptr<Button>> tokenButtons;
 private:
    Vector2 pos;
    Vector2 size;

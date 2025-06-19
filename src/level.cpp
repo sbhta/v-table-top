@@ -111,7 +111,6 @@ void Level::handleTokenSelectionAndDrag(Vector2 mousePos){
    }
    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && selectedToken) {
       if (selectedToken->isMouseOver(mousePos)) selectedToken->updatePos(Vector2Add(mousePos, dragOffset)); 
-      else selectedToken = nullptr; 
    }
 
 }

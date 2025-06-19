@@ -20,11 +20,11 @@ public:
    void drawGrid(); 
    void switchGrid();
    int gridSize = 36;
+   Token* selectedToken = nullptr;
 private:
    Texture2D background;
    bool gridVisible = false;
    std::vector<Token> tokens;
-   Token* selectedToken = nullptr;
    Vector2 dragOffset = {0, 0};
    std::string path;
 
