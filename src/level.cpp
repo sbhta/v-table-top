@@ -60,6 +60,10 @@ bool Level::loadMap(const std::string& pathDir) {
       }
       infile.close();
    }
+   else {
+      std::ofstream file("data.txt");
+      file.close();
+   }
    // Initializing the data
    for (const auto& v : data){
       // type token
